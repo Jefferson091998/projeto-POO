@@ -6,7 +6,7 @@ public class ContaBancaria {
     String agencia;
     String conta;
     double saldo;
-    String proprietario;
+    Usuario proprietario;
 
     void depositar(double valor) {// Metodo com parametro
         this.saldo += valor;
