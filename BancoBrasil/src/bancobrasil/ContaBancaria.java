@@ -20,7 +20,13 @@ public class ContaBancaria {
         }
     }
 
-    void transferir() {
+    void transferir(ContaBancaria contabancaria, double valor) {
+        if (saldo >= valor) {
+            this.sacar(valor);
+            contabancaria.saldo += valor;
+        }else {
+            System.out.println("Saldo insuficiente");
+        }
     }
 
     String consultarSaldo() {// Metodo sem parametro
