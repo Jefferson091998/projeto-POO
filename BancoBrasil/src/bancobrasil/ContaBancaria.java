@@ -3,11 +3,48 @@ package bancobrasil;
 public class ContaBancaria {
 
     //Atributos da classe
-    String agencia;
-    String conta;
-    double saldo;
-    Usuario proprietario;
+    private String agencia;
+    private String conta;
+    private double saldo;
+    private Usuario proprietario;
+    
+    ContaBancaria() {
+    }
 
+    ContaBancaria(String a,String c,double s,Usuario p) {
+        this.agencia=a;
+        this.conta=c;
+        this.saldo=s;
+        this.proprietario=p;
+    }
+    
+    public String getAgencia(){
+        return this.agencia;
+    }
+    public void setAgencia(String a){
+        this.agencia=a;
+    }
+    public String getConta(){
+        return this.conta;
+    }
+    public void setConta(String c){
+        this.conta=c;
+    }
+    public double getSaldo(){
+        return this.saldo;
+    }
+    public void setSaldo(double s){
+        this.saldo=s;
+    }
+    public Usuario getProprietario(){
+        return this.proprietario;
+    }
+    public void setProprietario(Usuario p){
+        this.proprietario=p;
+    }
+
+
+    
     void depositar(double valor) {// Metodo com parametro
         this.saldo += valor;
     }
