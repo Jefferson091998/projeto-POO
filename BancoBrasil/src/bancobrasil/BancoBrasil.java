@@ -1,5 +1,6 @@
 package bancobrasil;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BancoBrasil {
@@ -53,10 +54,30 @@ public class BancoBrasil {
 
         Scanner input = new Scanner(System.in);
         int opcao = 0;
+        int qtdCadastro = 0;
+        boolean islogin = false;
         Usuario user;
-        Usuario[] users = new Usuario[5];
+        ArrayList<Usuario> users = new ArrayList<>();
+        ArrayList<Gerente> gerentes = new ArrayList<>();
         ContaBancaria contabancaria = new ContaBancaria();
-
+        GerenteRepository db_gerente = new GerenteRepository();
+        gerentes = db_gerente.addGerente();
+        do {            
+            
+        System.out.println("***SEJA BEM VINDO AO BANCO BRASIL***");
+        System.out.printf("LOGIN: ");
+        String login = input.next();
+        System.out.printf("PASSWORD: ");
+        String password = input.next();
+        
+        for(Gerente g : gerentes){
+            if(g.getLogin().equals(login) && g.getPassword().equals(password)){
+                islogin=true;
+            }
+        }
+        
+            System.out.printf("%s\n", islogin == true?"": "Usuário ou senha invalido");
+        }while (islogin == false);
         while (opcao != 3) {
 
             System.out.println("***BANCO BRASIL***");
@@ -68,20 +89,22 @@ public class BancoBrasil {
 
             switch (opcao) {
                 case 1:
-                    for (int i = 0; i < 5; i++) {
-                        user = new Usuario();
-                        System.out.println("***CADASTRO DE CLIENTE***");
+                    System.out.println("***CADASTRO DE CLIENTE***");
+                    System.out.println("Quantidade de cadastros:");
+                    qtdCadastro = input.nextInt();
+                    for (int i = 0; i < qtdCadastro; i++) {
+                        user = new Cliente();
                         System.out.print("Nome: ");
                         user.setNome(input.next());
                         System.out.print("Sobrenome: ");
                         user.setSobrenome(input.next());
                         System.out.print("Telefone: ");
                         user.setTelefone(input.next());
-                        users[i] = user;
+                        users.add(user);
                     }
                     break;
                 case 2:
-                    if(users[0] == null){
+                    if (users.size() == 0) {
                         System.out.println("Cadastro do Cliente vazio");
                         break;
                     }
@@ -91,17 +114,23 @@ public class BancoBrasil {
                     System.out.print("Conta: ");
                     contabancaria.setConta(input.next());
                     System.out.println("CLIENTES CADASTRADOS");
-                    for (int i = 0; i < 5; i++) {
-                        System.out.printf("%d- %s %s\n",i,users[i].getNome(),users[i].getSobrenome());
+                    for (int i = 0; i < qtdCadastro; i++) {
+                        System.out.printf("%d- %s %s\n", i + 1, users.get(i).getNome(), users.get(i).getSobrenome());
                     }
                     System.out.println("Selecione o cliente: ");
                     int userOpcao = input.nextInt();
-                    if(userOpcao<=5 && userOpcao>0){
+                    if (userOpcao <= qtdCadastro && userOpcao > 0) {
                         userOpcao--;
-                        contabancaria.setProprietario(users[userOpcao]);
-                    }else{
+                        contabancaria.setProprietario(users.get(userOpcao));
+                    } else {
                         System.out.println("Cliente Invalido");
                     }
+                    System.out.print("\n\n Digite o valor de depositoçd -> ");
+                    contabancaria.depositar(input.nextDouble());
+                    System.out.println(contabancaria.consultarSaldo());
+                    System.out.print("\n\n Digite o valor para saque -> ");
+                    contabancaria.sacar(input.nextDouble());
+                    System.out.println(contabancaria.consultarSaldo());
 
                     break;
 

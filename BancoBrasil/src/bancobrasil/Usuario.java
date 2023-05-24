@@ -7,7 +7,6 @@ public class Usuario {
    private String nome;
    private String sobrenome;
    private String telefone;
-   private Date dataRegistro = new Date();
    Usuario(){
     }
     Usuario(String n,String sob,String tele){
@@ -35,16 +34,11 @@ public class Usuario {
     public void setTelefone(String t){
         this.telefone=t;
     }
-    public Date getDataRegistro(){
-        return this.dataRegistro;
-    }
-    public void setProprietario(Date d){
-        this.dataRegistro=d;
-    }
+   
     
     
     
-    String imprimirInfo(){
-        return String.format(" Nome: %s \nSobrenome: %s \nTelefone: %s \nData de Registro %s",this.nome,this.sobrenome,this.telefone,this.dataRegistro);
+    public String imprimirInfo(){
+        return String.format(" Nome: %s \nSobrenome: %s \nTelefone: %s \n",this.nome,this.sobrenome,this.telefone);
     }
 }
