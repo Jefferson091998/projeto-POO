@@ -2,7 +2,7 @@ package bancobrasil;
 
 import java.util.Date;
 
-public class Usuario {
+public abstract class Usuario {
     
    private String nome;
    private String sobrenome;
@@ -38,7 +38,5 @@ public class Usuario {
     
     
     
-    public String imprimirInfo(){
-        return String.format(" Nome: %s \nSobrenome: %s \nTelefone: %s \n",this.nome,this.sobrenome,this.telefone);
-    }
+    public abstract String imprimirInfo();
 }

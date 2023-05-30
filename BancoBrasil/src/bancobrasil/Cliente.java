@@ -5,12 +5,16 @@ import java.util.Date;
 
 public class Cliente extends Usuario{
     private Date dataRegistro = new Date();
+    
+    
 
     public Cliente() {
     }
 
     public Cliente(String n, String sob, String tele) {
-        super(n, sob, tele);
+        this.setNome(n);
+        this.setSobrenome(sob);
+        this.setTelefone(tele);
     }
     
      public Date getDataRegistro(){
